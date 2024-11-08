@@ -1,8 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const { findOne, create } = require("./user.model.js");
 const app = express();
 const UserModel = require('./user.model.js')
-const PORT = 9000 || 1000;
+const PORT = process.env.PORT;
 require('./db.connection.js')
 
 app.use(express.json())
@@ -40,6 +41,8 @@ app.get('/get-user/:id', async(req, res) => {
         console.log(`GOT AN ERROR WHILE FINDING THE USER ${error}`)
     }
 })
+
+
 
 app.listen(PORT, () => {
     console.log(`App is listening on PORT ${PORT}`)
