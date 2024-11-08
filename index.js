@@ -25,7 +25,7 @@ app.post('/create-account', async (req, res) => {
     }
 })
 
-app.get('/get-user:id', async(req, res) => {
+app.get('/get-user/:id', async(req, res) => {
     try {
         const userId = req.params.id;
         if (!userId) {
