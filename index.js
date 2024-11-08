@@ -25,6 +25,22 @@ app.post('/create-account', async (req, res) => {
     }
 })
 
+app.get('/get-user:id', async(req, res) => {
+    try {
+        const userId = req.params.id;
+        if (!userId) {
+            res.status(400).json({success: false, message: "Please provide the id"})
+        }
+        const findUser = await UserModel.findById(userId);
+        if(!findUser) {
+            res.status(404).json({success: false, message: "user not found"})
+        }
+        res.status(200).json({success: true, message: "User detected successfully", findUser})
+    } catch (error) {
+        console.log(`GOT AN ERROR WHILE FINDING THE USER ${error}`)
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`App is listening on PORT ${PORT}`)
 })
